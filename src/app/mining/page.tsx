@@ -27,6 +27,7 @@ interface AssociationRule {
   lift: number;
   support_count?: number;
 }
+
 interface MiningData {
   featureImportance: FeatureImportance | null;
   associationRules: Record<string, AssociationRule> | null;
