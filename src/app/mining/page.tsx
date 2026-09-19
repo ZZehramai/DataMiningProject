@@ -25,8 +25,8 @@ interface AssociationRule {
   support: number;
   confidence: number;
   lift: number;
+  support_count?: number;
 }
-
 interface MiningData {
   featureImportance: FeatureImportance | null;
   associationRules: Record<string, AssociationRule> | null;
@@ -36,8 +36,14 @@ interface MiningData {
 }
 
 const COLORS = [
-  "#3b82f6", "#06b6d4", "#10b981", "#f59e0b",
-  "#f43f5e", "#8b5cf6", "#ec4899", "#14b8a6",
+  "#3b82f6",
+  "#06b6d4",
+  "#10b981",
+  "#f59e0b",
+  "#f43f5e",
+  "#8b5cf6",
+  "#ec4899",
+  "#14b8a6",
 ];
 
 function getCorrelationColor(value: number): string {
@@ -84,11 +90,21 @@ export default function MiningPage() {
     featureImp && activeModel
       ? Object.entries(featureImp[activeModel])
           .sort((a, b) => b[1] - a[1])
-          .map(([name, value]) => ({ name, value: Math.round(value * 1000) / 1000 }))
+          .map(([name, value]) => ({
+            name,
+            value: Math.round(value * 1000) / 1000,
+          }))
       : [];
 
   // Correlation heatmap data for scatter plot visualization
-  const heatmapData: { x: number; y: number; z: number; xlabel: string; ylabel: string; value: number }[] = [];
+  const heatmapData: {
+    x: number;
+    y: number;
+    z: number;
+    xlabel: string;
+    ylabel: string;
+    value: number;
+  }[] = [];
   if (corrMatrix) {
     for (let i = 0; i < corrMatrix.columns.length; i++) {
       for (let j = 0; j < corrMatrix.columns.length; j++) {
@@ -122,8 +138,8 @@ export default function MiningPage() {
           <span>🎯</span> Feature Selection (Importance)
         </h2>
         <p className="text-sm text-slate-400 mb-4">
-          Feature importance scores from tree-based models. Higher values indicate
-          stronger predictive power for the target variable.
+          Feature importance scores from tree-based models. Higher values
+          indicate stronger predictive power for the target variable.
         </p>
 
         {/* Model tabs */}
@@ -182,7 +198,9 @@ export default function MiningPage() {
             <span>🔥</span> Correlation Heatmap
           </h2>
           <p className="text-sm text-slate-400 mb-4">
-            Pearson correlation coefficients for the 37 encoded modeling features used by the notebook. Red indicates positive correlation, blue indicates negative.
+            Pearson correlation coefficients for the 37 encoded modeling
+            features used by the notebook. Red indicates positive correlation,
+            blue indicates negative.
           </p>
 
           {/* Grid-based heatmap */}
@@ -204,7 +222,9 @@ export default function MiningPage() {
               {corrMatrix.columns.map((rowLabel, i) => (
                 <div key={rowLabel} className="flex">
                   <div className="w-28 h-10 flex items-center text-xs text-slate-400 font-mono pr-2 justify-end">
-                    {rowLabel.length > 10 ? rowLabel.slice(0, 10) + "…" : rowLabel}
+                    {rowLabel.length > 10
+                      ? rowLabel.slice(0, 10) + "…"
+                      : rowLabel}
                   </div>
                   {corrMatrix.columns.map((_, j) => {
                     const val = corrMatrix.matrix[i][j];
@@ -256,7 +276,9 @@ export default function MiningPage() {
             <span>📜</span> Association Rules
           </h2>
           <p className="text-sm text-slate-400 mb-4">
-            Best FP-Growth association rule reported by the updated notebook for each disease class where a qualifying rule was found. The notebook reports rules for 3 of the 8 classes at the current thresholds.
+            Best FP-Growth association rule reported by the updated notebook for
+            each disease class where a qualifying rule was found. The notebook
+            reports rules for 3 of the 8 classes at the current thresholds.
           </p>
 
           <div className="grid gap-4">
@@ -344,8 +366,8 @@ export default function MiningPage() {
                           rule.lift > 3
                             ? "bg-amber-500/20 text-amber-400"
                             : rule.lift > 2
-                            ? "bg-blue-500/20 text-blue-400"
-                            : "bg-slate-500/20 text-slate-400"
+                              ? "bg-blue-500/20 text-blue-400"
+                              : "bg-slate-500/20 text-slate-400"
                         }`}
                       >
                         {rule.lift.toFixed(2)}
@@ -365,19 +387,50 @@ export default function MiningPage() {
           <span>🔮</span> Clustering Analysis
         </h2>
         <p className="text-slate-400 mb-5">
-          K-Means was applied to the 15 numerical modeling features, excluding <code>sublabel</code>, <code>label</code>, and <code>disease_flags</code>. The updated notebook selects <strong>K = 2</strong> using the Calinski-Harabasz index.
+          K-Means was applied to the 15 numerical modeling features, excluding{" "}
+          <code>sublabel</code>, <code>label</code>, and{" "}
+          <code>disease_flags</code>. The updated notebook selects{" "}
+          <strong>K = 2</strong> using the Calinski-Harabasz index.
         </p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
-          <div className="stat-card p-4"><p className="text-sm text-slate-400">Selected K</p><p className="text-2xl font-bold text-blue-400">2</p></div>
-          <div className="stat-card p-4"><p className="text-sm text-slate-400">Cluster 0</p><p className="text-2xl font-bold text-cyan-400">23,377</p></div>
-          <div className="stat-card p-4"><p className="text-sm text-slate-400">Cluster 1</p><p className="text-2xl font-bold text-emerald-400">26,617</p></div>
-          <div className="stat-card p-4"><p className="text-sm text-slate-400">Silhouette</p><p className="text-2xl font-bold text-amber-400">0.063</p></div>
+          <div className="stat-card p-4">
+            <p className="text-sm text-slate-400">Selected K</p>
+            <p className="text-2xl font-bold text-blue-400">2</p>
+          </div>
+          <div className="stat-card p-4">
+            <p className="text-sm text-slate-400">Cluster 0</p>
+            <p className="text-2xl font-bold text-cyan-400">23,377</p>
+          </div>
+          <div className="stat-card p-4">
+            <p className="text-sm text-slate-400">Cluster 1</p>
+            <p className="text-2xl font-bold text-emerald-400">26,617</p>
+          </div>
+          <div className="stat-card p-4">
+            <p className="text-sm text-slate-400">Silhouette</p>
+            <p className="text-2xl font-bold text-amber-400">0.063</p>
+          </div>
         </div>
         <div className="grid md:grid-cols-2 gap-5">
-          <img src="/notebook_figures/cell_69_fig_1.png" alt="Elbow Method" className="w-full rounded-xl border border-slate-700" />
-          <img src="/notebook_figures/cell_70_fig_1.png" alt="Calinski-Harabasz Index" className="w-full rounded-xl border border-slate-700" />
-          <img src="/notebook_figures/cell_73_fig_1.png" alt="Silhouette Distribution" className="w-full rounded-xl border border-slate-700" />
-          <img src="/notebook_figures/cell_76_fig_1.png" alt="Hierarchical Clustering Dendrogram" className="w-full rounded-xl border border-slate-700" />
+          <img
+            src="/notebook_figures/cell_69_fig_1.png"
+            alt="Elbow Method"
+            className="w-full rounded-xl border border-slate-700"
+          />
+          <img
+            src="/notebook_figures/cell_70_fig_1.png"
+            alt="Calinski-Harabasz Index"
+            className="w-full rounded-xl border border-slate-700"
+          />
+          <img
+            src="/notebook_figures/cell_73_fig_1.png"
+            alt="Silhouette Distribution"
+            className="w-full rounded-xl border border-slate-700"
+          />
+          <img
+            src="/notebook_figures/cell_76_fig_1.png"
+            alt="Hierarchical Clustering Dendrogram"
+            className="w-full rounded-xl border border-slate-700"
+          />
         </div>
       </div>
     </div>
