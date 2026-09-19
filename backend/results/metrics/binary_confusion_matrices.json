@@ -1,0 +1,134 @@
+{
+  "Random Over-Sampling": {
+    "Logistic Regression": {
+      "labels": [
+        "Normal",
+        "Abnormal"
+      ],
+      "matrix": [
+        [
+          2723,
+          879
+        ],
+        [
+          1488,
+          4402
+        ]
+      ]
+    },
+    "Decision Tree": {
+      "labels": [
+        "Normal",
+        "Abnormal"
+      ],
+      "matrix": [
+        [
+          2749,
+          853
+        ],
+        [
+          910,
+          4980
+        ]
+      ]
+    },
+    "Random Forest": {
+      "labels": [
+        "Normal",
+        "Abnormal"
+      ],
+      "matrix": [
+        [
+          2703,
+          899
+        ],
+        [
+          270,
+          5620
+        ]
+      ]
+    },
+    "HistGradientBoosting": {
+      "labels": [
+        "Normal",
+        "Abnormal"
+      ],
+      "matrix": [
+        [
+          2785,
+          817
+        ],
+        [
+          412,
+          5478
+        ]
+      ]
+    }
+  },
+  "SMOTE": {
+    "Logistic Regression": {
+      "labels": [
+        "Normal",
+        "Abnormal"
+      ],
+      "matrix": [
+        [
+          2715,
+          887
+        ],
+        [
+          1486,
+          4404
+        ]
+      ]
+    },
+    "Decision Tree": {
+      "labels": [
+        "Normal",
+        "Abnormal"
+      ],
+      "matrix": [
+        [
+          2771,
+          831
+        ],
+        [
+          941,
+          4949
+        ]
+      ]
+    },
+    "Random Forest": {
+      "labels": [
+        "Normal",
+        "Abnormal"
+      ],
+      "matrix": [
+        [
+          2703,
+          899
+        ],
+        [
+          271,
+          5619
+        ]
+      ]
+    },
+    "HistGradientBoosting": {
+      "labels": [
+        "Normal",
+        "Abnormal"
+      ],
+      "matrix": [
+        [
+          2752,
+          850
+        ],
+        [
+          331,
+          5559
+        ]
+      ]
+    }
+  }
+}

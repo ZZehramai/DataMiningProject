@@ -1,0 +1,5 @@
+node_modules/
+.next/
+.DS_Store
+backend/best_model.joblib
+backend/best_label_model.joblib

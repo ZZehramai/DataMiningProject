@@ -1,0 +1,35 @@
+{
+  "N": {
+    "antecedent": "heart_rate=Medium",
+    "consequent": "sublabel=N",
+    "support": 0.1921,
+    "support_count": 9603,
+    "confidence": 0.588,
+    "lift": 2.5846,
+    "chi_square": null,
+    "all_confidence": null,
+    "antecedent_size": 1
+  },
+  "HY": {
+    "antecedent": "HbA1c_level=Low AND sleep_hours=High",
+    "consequent": "sublabel=HY",
+    "support": 0.0692,
+    "support_count": 3459,
+    "confidence": 0.6598,
+    "lift": 2.6555,
+    "chi_square": null,
+    "all_confidence": null,
+    "antecedent_size": 2
+  },
+  "DI_HY": {
+    "antecedent": "HbA1c_level=High AND ldl=Low",
+    "consequent": "sublabel=DI_HY",
+    "support": 0.0946,
+    "support_count": 4729,
+    "confidence": 0.7001,
+    "lift": 2.9591,
+    "chi_square": null,
+    "all_confidence": null,
+    "antecedent_size": 2
+  }
+}

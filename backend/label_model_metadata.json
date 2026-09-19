@@ -1,0 +1,41 @@
+{
+  "model": "Random Forest",
+  "sampling_method": "Random Over-Sampling",
+  "target": "label",
+  "classes": [
+    "Normal",
+    "Abnormal"
+  ],
+  "input_features": [
+    "gender",
+    "smoking",
+    "age",
+    "bmi",
+    "HbA1c_level",
+    "glucose",
+    "cholesterol",
+    "sleep_hours",
+    "triglycerides",
+    "physical_activity",
+    "family_history",
+    "stress_level",
+    "blood_pressure",
+    "sugar_consumption",
+    "crp_level",
+    "homocysteine_level",
+    "alcohol_intake",
+    "salt_intake",
+    "heart_rate",
+    "hdl",
+    "ldl",
+    "education_level",
+    "employment_status"
+  ],
+  "encoded_features": 37,
+  "best_model": "Random Forest",
+  "selection_priority": [
+    "Accuracy",
+    "F1-Score",
+    "AUC-ROC"
+  ]
+}

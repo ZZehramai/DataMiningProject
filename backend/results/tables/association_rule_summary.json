@@ -1,0 +1,25 @@
+{
+  "rule_counts": {
+    "N": 823,
+    "DI": 0,
+    "HY": 150,
+    "HT": 0,
+    "DI_HY": 149,
+    "DI_HT": 0,
+    "HT_HY": 0,
+    "DI_HT_HY": 0
+  },
+  "classes_with_rules": [
+    "N",
+    "HY",
+    "DI_HY"
+  ],
+  "classes_without_rules": [
+    "DI",
+    "HT",
+    "DI_HT",
+    "HT_HY",
+    "DI_HT_HY"
+  ],
+  "total_rules": 29552
+}

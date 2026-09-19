@@ -1,0 +1,10 @@
+{
+  "ROS": {
+    "Abnormal": 23557,
+    "Normal": 23557
+  },
+  "SMOTE": {
+    "Abnormal": 23557,
+    "Normal": 23557
+  }
+}
