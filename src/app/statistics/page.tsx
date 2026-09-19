@@ -47,8 +47,14 @@ interface StatsData {
 }
 
 const COLORS = [
-  "#3b82f6", "#06b6d4", "#10b981", "#f59e0b",
-  "#f43f5e", "#8b5cf6", "#ec4899", "#14b8a6",
+  "#3b82f6",
+  "#06b6d4",
+  "#10b981",
+  "#f59e0b",
+  "#f43f5e",
+  "#8b5cf6",
+  "#ec4899",
+  "#14b8a6",
 ];
 
 export default function StatisticsPage() {
@@ -187,7 +193,9 @@ export default function StatisticsPage() {
                             : "bg-blue-500/20 text-blue-400"
                         }`}
                       >
-                        {col === "sublabel" || col === "label" ? "Target" : "Feature"}
+                        {col === "sublabel" || col === "label"
+                          ? "Target"
+                          : "Feature"}
                       </span>
                     </td>
                   </tr>
@@ -269,9 +277,13 @@ export default function StatisticsPage() {
                 outerRadius={100}
                 paddingAngle={3}
                 dataKey="value"
-                label={({ name, percent }: { name?: string; percent?: number }) =>
-                  `${name ?? ""} ${((percent ?? 0) * 100).toFixed(0)}%`
-                }
+                label={({
+                  name,
+                  percent,
+                }: {
+                  name?: string;
+                  percent?: number;
+                }) => `${name ?? ""} ${((percent ?? 0) * 100).toFixed(0)}%`}
                 labelLine={{ stroke: "#475569" }}
               >
                 {classDistData.map((_, i) => (
@@ -300,20 +312,42 @@ export default function StatisticsPage() {
             <div className="grid grid-cols-3 gap-4 mb-4">
               <div className="stat-card p-4 text-center">
                 <p className="text-sm text-slate-400">Total Samples</p>
-                <p className="text-xl font-bold text-blue-400">{totalSamples}</p>
+                <p className="text-xl font-bold text-blue-400">
+                  {totalSamples}
+                </p>
               </div>
               <div className="stat-card p-4 text-center">
                 <p className="text-sm text-slate-400">Majority Class</p>
                 <p className="text-xl font-bold text-emerald-400">
-                  {Object.entries(classDist).sort((a, b) => b[1] - a[1])[0]?.[0]}{" "}
-                  ({Object.entries(classDist).sort((a, b) => b[1] - a[1])[0]?.[1]})
+                  {
+                    Object.entries(classDist).sort(
+                      (a, b) => b[1] - a[1],
+                    )[0]?.[0]
+                  }{" "}
+                  (
+                  {
+                    Object.entries(classDist).sort(
+                      (a, b) => b[1] - a[1],
+                    )[0]?.[1]
+                  }
+                  )
                 </p>
               </div>
               <div className="stat-card p-4 text-center">
                 <p className="text-sm text-slate-400">Minority Class</p>
                 <p className="text-xl font-bold text-rose-400">
-                  {Object.entries(classDist).sort((a, b) => a[1] - b[1])[0]?.[0]}{" "}
-                  ({Object.entries(classDist).sort((a, b) => a[1] - b[1])[0]?.[1]})
+                  {
+                    Object.entries(classDist).sort(
+                      (a, b) => a[1] - b[1],
+                    )[0]?.[0]
+                  }{" "}
+                  (
+                  {
+                    Object.entries(classDist).sort(
+                      (a, b) => a[1] - b[1],
+                    )[0]?.[1]
+                  }
+                  )
                 </p>
               </div>
             </div>
@@ -335,11 +369,15 @@ export default function StatisticsPage() {
           <span>👥</span> Disease Class Distribution by Gender
         </h2>
         <p className="text-sm text-slate-400 mb-5">
-          Distribution of the eight disease sublabels across Female, Male, and Unknown gender records.
+          Distribution of the eight disease sublabels across Female, Male, and
+          Unknown gender records.
         </p>
 
         <ResponsiveContainer width="100%" height={380}>
-          <BarChart data={genderClassData} margin={{ top: 10, right: 20, left: 10, bottom: 10 }}>
+          <BarChart
+            data={genderClassData}
+            margin={{ top: 10, right: 20, left: 10, bottom: 10 }}
+          >
             <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
             <XAxis dataKey="gender" stroke="#94a3b8" />
             <YAxis stroke="#94a3b8" />
@@ -368,17 +406,27 @@ export default function StatisticsPage() {
             <thead>
               <tr>
                 <th>Gender</th>
-                {diseaseClasses.map((label) => <th key={label}>{label}</th>)}
+                {diseaseClasses.map((label) => (
+                  <th key={label}>{label}</th>
+                ))}
                 <th>Total</th>
               </tr>
             </thead>
             <tbody>
               {genderClassData.map((row) => {
-                const total = diseaseClasses.reduce((sum, label) => sum + Number(row[label] ?? 0), 0);
+                const total = diseaseClasses.reduce(
+                  (sum, label) =>
+                    sum + Number((row as Record<string, unknown>)[label] ?? 0),
+                  0,
+                );
                 return (
                   <tr key={row.gender}>
                     <td className="font-semibold">{row.gender}</td>
-                    {diseaseClasses.map((label) => <td key={label}>{row[label] as number}</td>)}
+                    {diseaseClasses.map((label) => (
+                      <td key={label}>
+                        {(row as Record<string, unknown>)[label] as number}
+                      </td>
+                    ))}
                     <td className="font-semibold text-blue-300">{total}</td>
                   </tr>
                 );
